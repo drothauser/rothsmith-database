@@ -10,9 +10,9 @@ import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-import com.rothsmith.utils.database.JndiDatasourceBootstrapperException;
 import com.rothsmith.utils.database.bootstrap.JNDIBootstrapper;
 
 /**
@@ -35,7 +35,8 @@ public class JNDIBootstrapperTest {
 
 		// Delete .bindings file.
 		String tmpdir = System.getProperty("java.io.tmpdir");
-		File bindingsFile = new File(tmpdir + File.separatorChar + ".bindings");
+		File bindingsFile =
+			new File(tmpdir + File.separatorChar + ".bindings");
 		FileUtils.deleteQuietly(bindingsFile);
 	}
 
@@ -73,6 +74,7 @@ public class JNDIBootstrapperTest {
 	 * .
 	 */
 	@Test
+	@Ignore
 	public void testBootstrapClaimCenterDS() {
 		try {
 			JNDIBootstrapper.CC.bootstrapDS("CC-DatabaseAuthentication.xml");
@@ -91,7 +93,7 @@ public class JNDIBootstrapperTest {
 	 */
 	@Test(expected = JndiDatasourceBootstrapperException.class)
 	public void testBootstrapBadFile()
-	        throws JndiDatasourceBootstrapperException {
+			throws JndiDatasourceBootstrapperException {
 
 		JNDIBootstrapper.JBOSS.bootstrapDS("bogus.xml");
 

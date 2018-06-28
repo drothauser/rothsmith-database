@@ -18,16 +18,10 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.rothsmith.javaunderground.jdbc.DebugLevel;
-import com.rothsmith.javaunderground.jdbc.DebuggableStatement;
-import com.rothsmith.javaunderground.jdbc.FormatterFactory;
-import com.rothsmith.javaunderground.jdbc.ParameterIndexOutOfBoundsException;
-import com.rothsmith.javaunderground.jdbc.SqlFormatter;
-import com.rothsmith.javaunderground.jdbc.StatementFactory;
 
 /**
  * Junit tests for {@link DebuggableStatement}.
@@ -35,13 +29,14 @@ import com.rothsmith.javaunderground.jdbc.StatementFactory;
  * @author drothauser
  * 
  */
+@Ignore
 public class OracleDebuggableStatementTest {
 
 	/**
 	 * SLF4J Logger for OracleDebuggableStatementTest.
 	 */
 	private static final Logger LOGGER =
-	    LoggerFactory.getLogger(OracleDebuggableStatementTest.class);
+		LoggerFactory.getLogger(OracleDebuggableStatementTest.class);
 
 	/**
 	 * JDBC {@link BasicDataSource}.
@@ -62,8 +57,8 @@ public class OracleDebuggableStatementTest {
 		datasource.setUsername("reporting");
 		datasource.setPassword("reporting");
 		datasource.setUrl(
-		    "jdbc:oracle:thin:@ldap://oradsqa.fcci-group.com:10389/DV01,"
-		        + "cn=OracleContext,dc=fcci-group,dc=com");
+				"jdbc:oracle:thin:@ldap://oradsqa.fcci-group.com:10389/DV01,"
+					+ "cn=OracleContext,dc=fcci-group,dc=com");
 
 	}
 
@@ -80,12 +75,13 @@ public class OracleDebuggableStatementTest {
 			conn = datasource.getConnection();
 			String sqlStatement = "SELECT 1 FROM DUAL";
 			SqlFormatter formatter =
-			    FormatterFactory.getInstance().getFormatter(conn);
+				FormatterFactory.getInstance().getFormatter(conn);
 			debuggableStmt = new DebuggableStatement(conn, sqlStatement,
-			    formatter, DebugLevel.ON);
+					formatter, DebugLevel.ON);
 			LOGGER.info(debuggableStmt.toString());
 		} catch (Exception e) {
-			String errmsg = "Exception caught in testDebuggableStatement: " + e;
+			String errmsg =
+				"Exception caught in testDebuggableStatement: " + e;
 			LOGGER.error(errmsg, e);
 			fail(errmsg);
 		} finally {
@@ -108,20 +104,20 @@ public class OracleDebuggableStatementTest {
 			conn = datasource.getConnection();
 
 			SqlFormatter formatter =
-			    FormatterFactory.getInstance().getFormatter(conn);
+				FormatterFactory.getInstance().getFormatter(conn);
 
 			StatementFactory.setDefaultDebug(DebugLevel.ON);
 			ps = StatementFactory.getStatement(conn,
-			    "SELECT DUMMY FROM DUAL WHERE DUMMY = ?", formatter);
+					"SELECT DUMMY FROM DUAL WHERE DUMMY = ?", formatter);
 
 			ps.setString(1, "X");
 
 			String debuggableSQL = ps.toString();
 			LOGGER.debug("SQL Statement:\n" + debuggableSQL); // NOPMD ignore
-			                                                  // same literals
+															  // same literals
 
 			assertEquals("SELECT DUMMY FROM DUAL WHERE DUMMY = 'X'",
-			    debuggableSQL);
+					debuggableSQL);
 
 			rs = ps.executeQuery();
 
@@ -129,12 +125,12 @@ public class OracleDebuggableStatementTest {
 				assertEquals("X", rs.getString(1));
 			} else {
 				fail("Expected query to return  \"X\""); // NOPMD ignore same
-				                                         // literals
+														 // literals
 			}
 
 		} catch (SQLException e) {
 			String errmsg = "Caught SQLException: " + e; // NOPMD ignore same
-			                                             // literals
+														 // literals
 			LOGGER.error(errmsg, e);
 			fail(errmsg);
 		} finally {
@@ -156,14 +152,15 @@ public class OracleDebuggableStatementTest {
 			conn = datasource.getConnection();
 
 			ps = StatementFactory.getStatement(conn,
-			    "SELECT * FROM DUAL WHERE DUMMY = ?", DebugLevel.ON);
+					"SELECT * FROM DUAL WHERE DUMMY = ?", DebugLevel.ON);
 
 			ps.setString(1, "X");
 
 			String debuggableSQL = ps.toString();
 			LOGGER.debug("SQL Statement:\n" + debuggableSQL);
 
-			assertEquals("SELECT * FROM DUAL WHERE DUMMY = 'X'", debuggableSQL);
+			assertEquals("SELECT * FROM DUAL WHERE DUMMY = 'X'",
+					debuggableSQL);
 
 			rs = ps.executeQuery();
 
@@ -196,7 +193,7 @@ public class OracleDebuggableStatementTest {
 			conn = datasource.getConnection();
 
 			ps = StatementFactory.getStatement(conn,
-			    "SELECT * FROM DUAL WHERE DUMMY = ?");
+					"SELECT * FROM DUAL WHERE DUMMY = ?");
 
 			ps.setString(1, "X");
 
@@ -204,7 +201,7 @@ public class OracleDebuggableStatementTest {
 			LOGGER.debug("SQL Statement:\n" + debuggableSQL);
 
 			assertNotSame("SELECT * FROM DUAL " + "WHERE DUMMY = 'X'",
-			    debuggableSQL);
+					debuggableSQL);
 
 			rs = ps.executeQuery();
 
@@ -237,7 +234,7 @@ public class OracleDebuggableStatementTest {
 			conn = datasource.getConnection();
 
 			ps = StatementFactory.getStatement(conn,
-			    "SELECT * FROM DUAL WHERE DUMMY = ?", DebugLevel.OFF);
+					"SELECT * FROM DUAL WHERE DUMMY = ?", DebugLevel.OFF);
 
 			ps.setString(1, "X");
 
@@ -245,7 +242,7 @@ public class OracleDebuggableStatementTest {
 			LOGGER.debug("SQL Statement:\n" + debuggableSQL);
 
 			assertNotSame("SELECT * FROM DUAL " + "WHERE DUMMY = 'X'",
-			    debuggableSQL);
+					debuggableSQL);
 
 			rs = ps.executeQuery();
 
@@ -273,7 +270,9 @@ public class OracleDebuggableStatementTest {
 	 *             SQLException
 	 */
 	@Test(expected = ParameterIndexOutOfBoundsException.class)
-	public void testDebuggableStatementFactoryParamOOB() throws SQLException {
+	@Ignore
+	public void testDebuggableStatementFactoryParamOOB()
+			throws SQLException {
 
 		Connection conn = null; // NOPMD - Close by DbUtils
 		PreparedStatement ps = null;
@@ -282,7 +281,7 @@ public class OracleDebuggableStatementTest {
 			conn = datasource.getConnection();
 
 			ps = StatementFactory.getStatement(conn,
-			    "SELECT DUMMY FROM DUAL WHERE DUMMY = ?", DebugLevel.ON);
+					"SELECT DUMMY FROM DUAL WHERE DUMMY = ?", DebugLevel.ON);
 
 			ps.setString(2, "X");
 
@@ -306,7 +305,8 @@ public class OracleDebuggableStatementTest {
 			conn = datasource.getConnection();
 
 			ps = StatementFactory.getStatement(conn,
-			    "SELECT * " + "FROM DUAL WHERE DUMMY = ?", DebugLevel.ON);
+					"SELECT * " + "FROM DUAL WHERE DUMMY = ?",
+					DebugLevel.ON);
 
 			ps.setString(1, "X");
 
@@ -317,13 +317,13 @@ public class OracleDebuggableStatementTest {
 			for (Method method : methods) {
 				String methodName = method.getName();
 				if (method.getParameterTypes().length == 0
-				    && !void.class.equals(method.getReturnType())) {
+					&& !void.class.equals(method.getReturnType())) {
 					LOGGER.info("method: " + methodName);
 					try {
 						method.invoke(ps, new Object[] {});
 					} catch (Exception e) {
-						LOGGER
-						    .warn("Could not invoke " + methodName + ": " + e);
+						LOGGER.warn(
+								"Could not invoke " + methodName + ": " + e);
 					}
 				}
 			}
@@ -358,23 +358,25 @@ public class OracleDebuggableStatementTest {
 
 		try {
 			conn = datasource.getConnection();
-			String sqlStatement = "SELECT SYSDATE FROM DUAL WHERE TO_TIMESTAMP"
-			    + "('2009-03-15 12:52:03','YYYY-MM-DD HH24:MI:SS')" + " <= ?";
+			String sqlStatement =
+				"SELECT SYSDATE FROM DUAL WHERE TO_TIMESTAMP"
+					+ "('2009-03-15 12:52:03','YYYY-MM-DD HH24:MI:SS')"
+					+ " <= ?";
 			SqlFormatter formatter =
-			    FormatterFactory.getInstance().getFormatter(conn);
+				FormatterFactory.getInstance().getFormatter(conn);
 			ps = new DebuggableStatement(conn, sqlStatement, formatter,
-			    DebugLevel.ON);
+					DebugLevel.ON);
 			java.sql.Timestamp paramTS =
-			    new java.sql.Timestamp(System.currentTimeMillis());
+				new java.sql.Timestamp(System.currentTimeMillis());
 			ps.setTimestamp(1, paramTS);
 			String sql = ps.toString();
-			LOGGER
-			    .info("test sql:" + System.getProperty("line.separator") + sql);
+			LOGGER.info("test sql:" + System.getProperty("line.separator")
+				+ sql);
 
 			rs = ps.executeQuery();
 
 			assertTrue("Expected SQL statement",
-			    StringUtils.contains(sql, "SELECT SYSDATE"));
+					StringUtils.contains(sql, "SELECT SYSDATE"));
 
 			if (!rs.next()) {
 				fail(sql + " did not return any results.");

@@ -24,12 +24,8 @@ import java.util.Map;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbutils.DbUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-
-import com.rothsmith.javaunderground.jdbc.BaseSqlFormatter;
-import com.rothsmith.javaunderground.jdbc.FormatterFactory;
-import com.rothsmith.javaunderground.jdbc.OracleSqlFormatter;
-import com.rothsmith.javaunderground.jdbc.SqlFormatter;
 
 /**
  * Junit test for the {@link BaseSqlFormatter} class.
@@ -120,14 +116,14 @@ public class BaseSqlFormatterTest {
 
 			@Override
 			public Reader getCharacterStream(long pos, long length)
-			        throws SQLException {
+					throws SQLException {
 
 				return null;
 			}
 
 			@Override
 			public String getSubString(long pos, int length)
-			        throws SQLException {
+					throws SQLException {
 
 				return null;
 			}
@@ -139,20 +135,21 @@ public class BaseSqlFormatterTest {
 
 			@Override
 			public long position(String searchstr, long start)
-			        throws SQLException {
+					throws SQLException {
 
 				return 0;
 			}
 
 			@Override
 			public long position(Clob searchstr, long start)
-			        throws SQLException {
+					throws SQLException {
 
 				return 0;
 			}
 
 			@Override
-			public OutputStream setAsciiStream(long pos) throws SQLException {
+			public OutputStream setAsciiStream(long pos)
+					throws SQLException {
 
 				return null;
 			}
@@ -171,7 +168,7 @@ public class BaseSqlFormatterTest {
 
 			@Override
 			public int setString(long pos, String str, int offset, int len)
-			        throws SQLException {
+					throws SQLException {
 
 				return 0;
 			}
@@ -210,12 +207,13 @@ public class BaseSqlFormatterTest {
 
 			@Override
 			public InputStream getBinaryStream(long pos, long length)
-			        throws SQLException {
+					throws SQLException {
 				return null;
 			}
 
 			@Override
-			public byte[] getBytes(long pos, int length) throws SQLException {
+			public byte[] getBytes(long pos, int length)
+					throws SQLException {
 				return bytes;
 			}
 
@@ -227,23 +225,25 @@ public class BaseSqlFormatterTest {
 
 			@Override
 			public long position(byte[] pattern, long start)
-			        throws SQLException {
+					throws SQLException {
 				return 0;
 			}
 
 			@Override
-			public long position(Blob pattern, long start) throws SQLException {
+			public long position(Blob pattern, long start)
+					throws SQLException {
 				return 0;
 			}
 
 			@Override
-			public OutputStream setBinaryStream(long pos) throws SQLException {
+			public OutputStream setBinaryStream(long pos)
+					throws SQLException {
 				return null;
 			}
 
 			@Override
 			public int setBytes(long pos, byte[] bytes, int offset, int len)
-			        throws SQLException {
+					throws SQLException {
 				return 0;
 			}
 
@@ -278,7 +278,7 @@ public class BaseSqlFormatterTest {
 
 			@Override
 			public Object getObject(Map<String, Class<?>> map)
-			        throws SQLException {
+					throws SQLException {
 				// stub
 				return null;
 			}
@@ -312,18 +312,19 @@ public class BaseSqlFormatterTest {
 
 			@Override
 			public Object getArray(Map<String, Class<?>> map)
-			        throws SQLException {
+					throws SQLException {
 				return null;
 			}
 
 			@Override
-			public Object getArray(long index, int count) throws SQLException {
+			public Object getArray(long index, int count)
+					throws SQLException {
 				return null;
 			}
 
 			@Override
 			public Object getArray(long index, int count,
-			    Map<String, Class<?>> map) throws SQLException {
+					Map<String, Class<?>> map) throws SQLException {
 				return null;
 			}
 
@@ -344,19 +345,19 @@ public class BaseSqlFormatterTest {
 
 			@Override
 			public ResultSet getResultSet(Map<String, Class<?>> map)
-			        throws SQLException {
+					throws SQLException {
 				return null;
 			}
 
 			@Override
 			public ResultSet getResultSet(long index, int count)
-			        throws SQLException {
+					throws SQLException {
 				return null;
 			}
 
 			@Override
 			public ResultSet getResultSet(long index, int count,
-			    Map<String, Class<?>> map) throws SQLException {
+					Map<String, Class<?>> map) throws SQLException {
 				return null;
 			}
 
@@ -438,7 +439,8 @@ public class BaseSqlFormatterTest {
 	 */
 	@Test
 	public void testFormatString() throws SQLException {
-		String formattedString = baseSqlFormatter.format((Object) testString);
+		String formattedString =
+			baseSqlFormatter.format((Object) testString);
 		assertNotNull("formattedString should not be null", formattedString);
 
 	}
@@ -452,7 +454,7 @@ public class BaseSqlFormatterTest {
 	@Test
 	public void testFormatInteger() throws SQLException {
 		String formattedString =
-		    baseSqlFormatter.format((Object) Integer.valueOf(1));
+			baseSqlFormatter.format((Object) Integer.valueOf(1));
 		assertNotNull("formattedString should not be null", formattedString);
 
 	}
@@ -481,7 +483,7 @@ public class BaseSqlFormatterTest {
 	public void testGetFormatter() {
 
 		SqlFormatter formatter = FormatterFactory.getInstance()
-		    .getFormatter(FormatterFactory.ORACLE_FORMATTER);
+			.getFormatter(FormatterFactory.ORACLE_FORMATTER);
 
 		assertNotNull("formatter should not be null", formatter);
 
@@ -495,20 +497,21 @@ public class BaseSqlFormatterTest {
 	public void testGetFormatterError() {
 
 		SqlFormatter formatter =
-		    FormatterFactory.getInstance().getFormatter("bogus");
+			FormatterFactory.getInstance().getFormatter("bogus");
 
 		assertNull("formatter should be null", formatter);
 
 	}
 
 	/**
-	 * Test method for {@link FormatterFactory#getFormatter(Connection)} using a
-	 * live SQL Connection.
+	 * Test method for {@link FormatterFactory#getFormatter(Connection)} using
+	 * a live SQL Connection.
 	 * 
 	 * @throws SQLException
 	 *             Possible SQL connection error.
 	 */
 	@Test
+	@Ignore
 	public void testGetFormatterConn() throws SQLException {
 
 		BasicDataSource datasource = new BasicDataSource();
@@ -516,8 +519,8 @@ public class BaseSqlFormatterTest {
 		datasource.setUsername("reporting");
 		datasource.setPassword("reporting");
 		datasource.setUrl(
-		    "jdbc:oracle:thin:@ldap://oradsqa.fcci-group.com:10389/DV01,"
-		        + "cn=OracleContext,dc=fcci-group,dc=com");
+				"jdbc:oracle:thin:@ldap://oradsqa.fcci-group.com:10389/DV01,"
+					+ "cn=OracleContext,dc=fcci-group,dc=com");
 
 		Connection conn = null; // NOPMD - Close by DbUtils
 
@@ -525,7 +528,7 @@ public class BaseSqlFormatterTest {
 
 			conn = datasource.getConnection();
 			SqlFormatter formatter =
-			    FormatterFactory.getInstance().getFormatter(conn);
+				FormatterFactory.getInstance().getFormatter(conn);
 
 			assertNotNull("formatter should not be null", formatter);
 			assertTrue(formatter instanceof OracleSqlFormatter);
@@ -537,8 +540,8 @@ public class BaseSqlFormatterTest {
 	}
 
 	/**
-	 * Test method for {@link FormatterFactory#getFormatter(Connection)} using a
-	 * closed SQL Connection.
+	 * Test method for {@link FormatterFactory#getFormatter(Connection)} using
+	 * a closed SQL Connection.
 	 * 
 	 * @throws SQLException
 	 *             Possible SQL connection error.
@@ -547,7 +550,8 @@ public class BaseSqlFormatterTest {
 	public void testGetFormatterConnError() throws SQLException {
 
 		BasicDataSource datasource = new BasicDataSource();
-		datasource.setDriverClassName("org.apache.derby.jdbc.EmbeddedDriver");
+		datasource
+			.setDriverClassName("org.apache.derby.jdbc.EmbeddedDriver");
 		datasource.setUsername("reporting");
 		datasource.setPassword("reporting");
 		datasource.setUrl("jdbc:derby:testdb;create=true");
@@ -559,7 +563,7 @@ public class BaseSqlFormatterTest {
 			conn = datasource.getConnection();
 			conn.close();
 			SqlFormatter formatter =
-			    FormatterFactory.getInstance().getFormatter(conn);
+				FormatterFactory.getInstance().getFormatter(conn);
 
 			assertNull("formatter should be null", formatter);
 
@@ -570,8 +574,8 @@ public class BaseSqlFormatterTest {
 	}
 
 	/**
-	 * Test method for {@link FormatterFactory#getFormatter(Connection)} using a
-	 * closed SQL Connection.
+	 * Test method for {@link FormatterFactory#getFormatter(Connection)} using
+	 * a closed SQL Connection.
 	 * 
 	 * @throws SQLException
 	 *             Possible SQL connection error.
@@ -580,7 +584,8 @@ public class BaseSqlFormatterTest {
 	public void testGetFormatterJavaDb() throws SQLException {
 
 		BasicDataSource datasource = new BasicDataSource();
-		datasource.setDriverClassName("org.apache.derby.jdbc.EmbeddedDriver");
+		datasource
+			.setDriverClassName("org.apache.derby.jdbc.EmbeddedDriver");
 		datasource.setUsername("reporting");
 		datasource.setPassword("reporting");
 		datasource.setUrl("jdbc:derby:testdb;create=true");
@@ -591,7 +596,7 @@ public class BaseSqlFormatterTest {
 
 			conn = datasource.getConnection();
 			SqlFormatter formatter =
-			    FormatterFactory.getInstance().getFormatter(conn);
+				FormatterFactory.getInstance().getFormatter(conn);
 
 			assertNotNull("formatter should not be null", formatter);
 
