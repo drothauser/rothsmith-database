@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<authentication>
+  <username>BrZTBHdM07s=</username> 
+  <password>BrZTBHdM07s=</password>
+  <dburl>jdbc:as400://cosmo/;prompt=false;transaction isolation=none;database name=APPDBDEV;libraries=,*LIBL,WCPRDLIBF,OPLIB,WCPRDLIBO,ARCUST,MOGP90DAT,MOGP90TBL,ZCLIB,XAPRDLIBF,XAPRDLIBO;naming=system;date format=iso</dburl>
+</authentication>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+
+<!-- The contents of this file will be loaded for each web application -->
+<Context>
+
+	<!-- Default set of monitored resources -->
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+
+	<!-- For Jotm Transactions -->
+	<Resource name="UserTransaction" auth="Container"
+		type="javax.transaction.UserTransaction" />
+	<Transaction factory="org.objectweb.jotm.UserTransactionFactory"
+		jotm.timeout="60" />
+
+	<Resource name="mail/Session" auth="Container" type="javax.mail.Session"
+		mail.smtp.host="mail.fcci-group.com" />
+
+	<Resource
+		name="jdbc/OdsOracleDS"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
+		url="jdbc:derby:testdb;create=true"
+		username="reporting"
+		password="reporting"
+		initialSize="10"
+		maxActive="20"
+		maxIdle="10"
+		maxWait="10000"
+		testOnBorrow="true"
+		validationQuery="select current_timestamp from sysibm.sysdummy1"
+		validationInterval="30000"
+		removeAbandoned="true"
+		removeAbandonedTimeout="60"
+		logAbandoned="true" />
+		
+	<Resource
+		name="jdbc/WcAS400DS"
+		url="jdbc:as400://gemini/;prompt=false;transaction isolation=none;libraries=,*LIBL,ZCLIB,wcdevlib,WCQUALIB,WCITGLIB,WCPRDLIBF,XAPRDLIBF,XAPRDLIBO,OPLIB,WCPRDLIBO,ARCUST,JCMDVLLIB, MOGP90DAT, MOGP90TBL;naming=system;date format=iso"
+		driverClassName="com.ibm.as400.access.AS400JDBCDriver"
+		type="javax.sql.DataSource"
+		auth="Container"			
+		initialSize="0"			
+		maxTotal="20"
+		username="ODS_CRT"
+		password="mju76yhn"
+		testOnBorrow="true"
+		validationInterval="30000"
+		validationQuery="select current_date from qsys2/qsqptabl" />
+
+</Context> 

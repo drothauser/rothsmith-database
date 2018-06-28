@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===================================================================== -->
+<!-- JBoss 4.0.5 Oracle Datasources -->
+<!-- ===================================================================== -->
+
+<datasources>
+
+  <local-tx-datasource>
+    <jndi-name>JavaDbDS</jndi-name>
+    <connection-url>jdbc:derby:testdb;create=true</connection-url>
+    <driver-class>org.apache.derby.jdbc.EmbeddedDriver</driver-class>
+    <user-name>reporting</user-name>
+    <password>reporting</password>    
+    <min-pool-size>0</min-pool-size>
+    <max-pool-size>100</max-pool-size>
+    <blocking-timeout-millis>5000</blocking-timeout-millis>
+    <idle-timeout-minutes>15</idle-timeout-minutes>   
+    <!-- Checks the Oracle error codes and messages for fatal errors -->
+    <exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>
+    <new-connection-sql>select current_timestamp from sysibm.sysdummy1</new-connection-sql>
+    <!-- this will be run before a managed connection is removed from the pool for use by a client-->
+    <check-valid-connection-sql>select current_timestamp from sysibm.sysdummy1</check-valid-connection-sql>
+  </local-tx-datasource>
+
+</datasources>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===================================================================== -->
+<!-- JBoss 4.0.5 Oracle Datasources -->
+<!-- ===================================================================== -->
+
+<datasources>
+
+	<local-tx-datasource>
+		<jndi-name>RNetMsSqlDS</jndi-name>
+		<connection-url>jdbc:sqlserver://sqldev:1433;databaseName=rnet;sendStringParametersAsUnicode=false
+		</connection-url>
+		<driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver
+		</driver-class>
+		<user-name>rnet</user-name>
+		<password>rnet2</password>
+		<!--pooling parameters -->
+		<min-pool-size>0</min-pool-size>
+		<max-pool-size>10</max-pool-size>
+		<blocking-timeout-millis>5000</blocking-timeout-millis>
+		<idle-timeout-minutes>15</idle-timeout-minutes>
+		<new-connection-sql>select getdate()</new-connection-sql>
+	</local-tx-datasource>
+
+	<local-tx-datasource>
+		<jndi-name>PcMsSqlDS</jndi-name>
+		<connection-url>jdbc:sqlserver://sqldev:1433;databaseName=pandc;sendStringParametersAsUnicode=false
+		</connection-url>
+		<driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver
+		</driver-class>
+		<user-name>reporting</user-name>
+		<password>reporting</password>
+		<!--pooling parameters -->
+		<min-pool-size>0</min-pool-size>
+		<max-pool-size>10</max-pool-size>
+		<blocking-timeout-millis>5000</blocking-timeout-millis>
+		<idle-timeout-minutes>15</idle-timeout-minutes>
+		<new-connection-sql>select getdate()</new-connection-sql>
+	</local-tx-datasource>
+
+	<local-tx-datasource>
+		<jndi-name>Ew3OracleDS</jndi-name>
+		<connection-url>jdbc:oracle:thin:@ldap://oradsqa.fcci-group.com:10389/DV01,cn=OracleContext,dc=fcci-group,dc=com</connection-url>
+		<driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+		<user-name>ew3</user-name>
+		<password>ew3</password>
+		<!--pooling parameters -->
+		<min-pool-size>0</min-pool-size>
+		<max-pool-size>10</max-pool-size>
+		<blocking-timeout-millis>5000</blocking-timeout-millis>
+		<idle-timeout-minutes>2</idle-timeout-minutes>
+		<!-- Uses the pingDatabase method to check a connection is still valid 
+			before handing it out from the pool -->
+		<valid-connection-checker-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleValidConnectionChecker
+		</valid-connection-checker-class-name>
+		<!-- Checks the Oracle error codes and messages for fatal errors -->
+		<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter
+		</exception-sorter-class-name>
+		<new-connection-sql>select sysdate from dual</new-connection-sql>
+		<!-- <check-valid-connection-sql>select sysdate from dual</check-valid-connection-sql> -->
+		<track-statements>true</track-statements>
+	</local-tx-datasource>
+
+	<local-tx-datasource>
+		<jndi-name>BoaLockboxOracleDS</jndi-name>
+		<connection-url>jdbc:oracle:thin:@oracledev1:1521:dv01
+		</connection-url>
+		<driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+		<user-name>boalckbx</user-name>
+		<password>boalckbx</password>
+		<!--pooling parameters -->
+		<min-pool-size>0</min-pool-size>
+		<max-pool-size>10</max-pool-size>
+		<blocking-timeout-millis>5000</blocking-timeout-millis>
+		<idle-timeout-minutes>15</idle-timeout-minutes>
+		<!-- Uses the pingDatabase method to check a connection is still valid 
+			before handing it out from the pool -->
+		<valid-connection-checker-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleValidConnectionChecker
+		</valid-connection-checker-class-name>
+		<!-- Checks the Oracle error codes and messages for fatal errors -->
+		<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter
+		</exception-sorter-class-name>
+		<new-connection-sql>select sysdate from dual</new-connection-sql>
+		<!-- this will be run before a managed connection is removed from the pool 
+			for use by a client -->
+		<check-valid-connection-sql>select sysdate from dual</check-valid-connection-sql>
+	</local-tx-datasource>
+
+</datasources>

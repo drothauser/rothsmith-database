@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<authentication>
+  <username>JBMvsj4rTBWR7Sth8CdkyA==</username> 
+  <password>JBMvsj4rTBWR7Sth8CdkyA==</password> 
+  <dburl>jdbc:sqlserver://sqldev7:1433;databaseName=ImageRightv5_MOv2;sendStringParametersAsUnicode=false</dburl>
+</authentication>

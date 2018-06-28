@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===================================================================== -->
+<!-- JBoss 4.0.5 Oracle Datasources -->
+<!-- ===================================================================== -->
+
+<datasources>
+
+	<local-tx-datasource>
+		<jndi-name>Pph1PhoenixOracleDS</jndi-name>
+		<connection-url>jdbc:oracle:thin:@ldap://oradsqa.fcci-group.com:10389/DV01,cn=OracleContext,dc=fcci-group,dc=com</connection-url>
+		<driver-class>oracle.jdbc.driver.OracleDriver</driver-class>
+		<user-name>reporting</user-name>
+		<password>reporting</password>
+		<min-pool-size>0</min-pool-size>
+		<max-pool-size>10</max-pool-size>
+		<blocking-timeout-millis>5000</blocking-timeout-millis>
+		<idle-timeout-minutes>15</idle-timeout-minutes>
+		<valid-connection-checker-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleValidConnectionChecker
+		</valid-connection-checker-class-name>
+		<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter
+		</exception-sorter-class-name>
+		<new-connection-sql>select sysdate from dual</new-connection-sql>
+		<track-statements>true</track-statements>
+		<connection-property name="autoCommit">false</connection-property>
+	</local-tx-datasource>
+
+	<local-tx-datasource>
+		<jndi-name>WcAS400DS</jndi-name>
+		<connection-url>jdbc:as400://gemini/;prompt=false;transaction
+			isolation=none;libraries=,*LIBL,ZCLIB,wcdevlib,WCQUALIB,WCITGLIB,WCPRDLIBF,XAPRDLIBF,XAPRDLIBO,OPLIB,WCPRDLIBO,ARCUST,JCMDVLLIB,
+			MOGP90DAT, MOGP90TBL;naming=system;date format=iso</connection-url>
+		<driver-class>com.ibm.as400.access.AS400JDBCDriver</driver-class>
+		<user-name>ODS_CRT</user-name>
+		<password>mju76yhn</password>
+		<min-pool-size>0</min-pool-size>
+		<max-pool-size>10</max-pool-size>
+		<blocking-timeout-millis>5000</blocking-timeout-millis>
+		<idle-timeout-minutes>15</idle-timeout-minutes>
+		<new-connection-sql>select current_date from qsys2/qsqptabl
+		</new-connection-sql>
+		<check-valid-connection-sql>select current_date from qsys2/qsqptabl
+		</check-valid-connection-sql>
+		<track-statements>true</track-statements>
+	</local-tx-datasource>
+
+  <local-tx-datasource>
+    <jndi-name>ImageRightMsSqlDS</jndi-name>
+    <connection-url>jdbc:sqlserver://sqldev7:1433;databaseName=ImageRightv5_MOv2;sendStringParametersAsUnicode=false</connection-url>
+    <driver-class>com.microsoft.sqlserver.jdbc.SQLServerDriver</driver-class>
+    <user-name>imageright</user-name>
+    <password>imageright</password>
+    <min-pool-size>0</min-pool-size>
+    <max-pool-size>10</max-pool-size>
+    <blocking-timeout-millis>5000</blocking-timeout-millis>
+    <idle-timeout-minutes>15</idle-timeout-minutes>
+    <new-connection-sql>select getdate()</new-connection-sql>
+  </local-tx-datasource>
+
+</datasources>
