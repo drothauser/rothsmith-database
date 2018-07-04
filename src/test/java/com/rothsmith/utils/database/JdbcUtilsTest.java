@@ -19,9 +19,6 @@ import javax.sql.DataSource;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.rothsmith.utils.database.JDBCServiceLocator;
-import com.rothsmith.utils.database.JdbcUtils;
-import com.rothsmith.utils.database.JndiDatasourceBootstrapper;
 import com.rothsmith.utils.database.jboss.JBossDatasourceParser;
 
 /**
@@ -40,11 +37,11 @@ public class JdbcUtilsTest {
 	@BeforeClass
 	public static void setUpBeforeClass() {
 
-		URL url = ClassLoader.getSystemResource("test-ds.xml");
+		URL url = JdbcUtilsTest.class.getResource("/test-ds.xml");
 		File datasourceFile = new File(url.getFile());
 
 		JndiDatasourceBootstrapper bootstrapper =
-		    new JndiDatasourceBootstrapper(new JBossDatasourceParser());
+			new JndiDatasourceBootstrapper(new JBossDatasourceParser());
 		bootstrapper.bind(datasourceFile);
 
 	}
@@ -65,10 +62,10 @@ public class JdbcUtilsTest {
 
 		try {
 			JDBCServiceLocator jdbcServiceLocator =
-			    JDBCServiceLocator.getInstance();
+				JDBCServiceLocator.getInstance();
 
 			DataSource dataSource =
-			    jdbcServiceLocator.getDataSource("JavaDbDS");
+				jdbcServiceLocator.getDataSource("JavaDbDS");
 
 			assertNotNull(dataSource);
 
@@ -77,7 +74,8 @@ public class JdbcUtilsTest {
 			JdbcUtils.setAutoCommit(conn, false);
 
 			statement = conn.createStatement();
-			statement.execute("select current_timestamp from sysibm.sysdummy1");
+			statement
+				.execute("select current_timestamp from sysibm.sysdummy1");
 
 			assertTrue(JdbcUtils.rollbackQuietly(conn));
 
@@ -106,10 +104,10 @@ public class JdbcUtilsTest {
 
 		try {
 			JDBCServiceLocator jdbcServiceLocator =
-			    JDBCServiceLocator.getInstance();
+				JDBCServiceLocator.getInstance();
 
 			DataSource dataSource =
-			    jdbcServiceLocator.getDataSource("JavaDbDS");
+				jdbcServiceLocator.getDataSource("JavaDbDS");
 
 			assertNotNull(dataSource);
 
