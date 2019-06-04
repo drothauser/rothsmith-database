@@ -3,3 +3,4 @@ target
 *.log 
 testdb 
 /Users/
+/.flattened-pom.xml
