@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.rothsmith.utils.database.ComparableDatasource;
+import net.rothsmith.utils.database.ComparableDatasource;
 
 /**
  * Test {@link ComparableDatasource}.

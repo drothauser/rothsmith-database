@@ -19,10 +19,10 @@ import javax.sql.DataSource;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.rothsmith.utils.database.JDBCServiceLocator;
-import com.rothsmith.utils.database.JdbcUtils;
-import com.rothsmith.utils.database.JndiDatasourceBootstrapper;
-import com.rothsmith.utils.database.jboss.JBossDatasourceParser;
+import net.rothsmith.utils.database.JDBCServiceLocator;
+import net.rothsmith.utils.database.JdbcUtils;
+import net.rothsmith.utils.database.JndiDatasourceBootstrapper;
+import net.rothsmith.utils.database.jboss.JBossDatasourceParser;
 
 /**
  * Tests for {@link JdbcUtils}.

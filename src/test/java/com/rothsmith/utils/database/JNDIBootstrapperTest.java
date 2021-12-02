@@ -13,7 +13,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.rothsmith.utils.database.bootstrap.JNDIBootstrapper;
+import net.rothsmith.utils.database.JndiDatasourceBootstrapperException;
+import net.rothsmith.utils.database.bootstrap.JNDIBootstrapper;
 
 /**
  * Tests for {@link JNDIBootstrapper}.
@@ -42,7 +43,7 @@ public class JNDIBootstrapperTest {
 
 	/**
 	 * Test bootstrapping a JBoss datasource file using
-	 * {@link com.rothsmith.utils.database.bootstrap.JNDIBootstrapper#bootstrapDS(String)}
+	 * {@link net.rothsmith.utils.database.bootstrap.JNDIBootstrapper#bootstrapDS(String)}
 	 * .
 	 */
 	@Test
@@ -56,7 +57,7 @@ public class JNDIBootstrapperTest {
 
 	/**
 	 * Test bootstrapping a Tomcat datasource file using
-	 * {@link com.rothsmith.utils.database.bootstrap.JNDIBootstrapper#bootstrapDS(String)}
+	 * {@link net.rothsmith.utils.database.bootstrap.JNDIBootstrapper#bootstrapDS(String)}
 	 * .
 	 */
 	@Test
@@ -70,7 +71,7 @@ public class JNDIBootstrapperTest {
 
 	/**
 	 * Test bootstrapping a Claim Center datasource file using
-	 * {@link com.rothsmith.utils.database.bootstrap.JNDIBootstrapper#bootstrapDS(String)}
+	 * {@link net.rothsmith.utils.database.bootstrap.JNDIBootstrapper#bootstrapDS(String)}
 	 * .
 	 */
 	@Test
@@ -85,7 +86,7 @@ public class JNDIBootstrapperTest {
 
 	/**
 	 * Test
-	 * {@link com.rothsmith.utils.database.bootstrap.JNDIBootstrapper#bootstrapDS(String)}
+	 * {@link net.rothsmith.utils.database.bootstrap.JNDIBootstrapper#bootstrapDS(String)}
 	 * using a file that doesn't exist.
 	 * 
 	 * @throws JndiDatasourceBootstrapperException

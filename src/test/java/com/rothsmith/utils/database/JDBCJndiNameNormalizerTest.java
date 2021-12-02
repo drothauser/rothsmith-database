@@ -15,8 +15,8 @@ import org.junit.runners.Parameterized;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.rothsmith.utils.database.JDBCJndiNameNormalizer;
-import com.rothsmith.utils.database.JndiNameNormalizer;
+import net.rothsmith.utils.database.JDBCJndiNameNormalizer;
+import net.rothsmith.utils.database.JndiNameNormalizer;
 
 /**
  * Test {@link JDBCJndiNameNormalizer}.

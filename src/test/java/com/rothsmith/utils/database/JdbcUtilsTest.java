@@ -20,7 +20,10 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.rothsmith.utils.database.jboss.JBossDatasourceParser;
+import net.rothsmith.utils.database.JDBCServiceLocator;
+import net.rothsmith.utils.database.JdbcUtils;
+import net.rothsmith.utils.database.JndiDatasourceBootstrapper;
+import net.rothsmith.utils.database.jboss.JBossDatasourceParser;
 
 /**
  * Tests for {@link JdbcUtils}.

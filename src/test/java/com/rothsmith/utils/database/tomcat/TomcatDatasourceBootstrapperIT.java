@@ -21,10 +21,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.rothsmith.utils.database.DatasourceParserException;
-import com.rothsmith.utils.database.JDBCServiceLocator;
-import com.rothsmith.utils.database.JndiDatasourceBootstrapper;
-import com.rothsmith.utils.database.tomcat.TomcatDatasourceParser;
+import net.rothsmith.utils.database.DatasourceParserException;
+import net.rothsmith.utils.database.JDBCServiceLocator;
+import net.rothsmith.utils.database.JndiDatasourceBootstrapper;
+import net.rothsmith.utils.database.tomcat.TomcatDatasourceParser;
 
 /**
  * Test {@link JndiDatasourceBootstrapper} using a Tomcat context.xml file.

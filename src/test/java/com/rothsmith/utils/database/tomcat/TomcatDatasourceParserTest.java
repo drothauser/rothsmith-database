@@ -16,9 +16,10 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.rothsmith.utils.database.DatasourceParser;
-import com.rothsmith.utils.database.DatasourceParserException;
-import com.rothsmith.utils.database.ValidatingDatasourceParser;
+import net.rothsmith.utils.database.DatasourceParser;
+import net.rothsmith.utils.database.DatasourceParserException;
+import net.rothsmith.utils.database.ValidatingDatasourceParser;
+import net.rothsmith.utils.database.tomcat.TomcatDatasourceParser;
 
 /**
  * Tests for {@link TomcatDatasourceParser}.

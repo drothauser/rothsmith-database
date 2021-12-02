@@ -12,7 +12,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.rothsmith.utils.database.tomcat.TomcatDatasourceChecker;
+import net.rothsmith.utils.database.tomcat.TomcatDatasourceChecker;
 
 /**
  * Test {@link TomcatDatasourceChecker}.
